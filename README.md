@@ -1,5 +1,5 @@
 # Academic Projects
-This repository includes acedamic projects from my university. Most of these projects are final projects but there are some projects which I have build for my personal learning experience. 
+This repository includes acedamic projects which are done in grourps from my university. Most of these projects are final projects but there are some projects which I have worked on for my personal learning experience. 
  
 1. Route case study 
 
