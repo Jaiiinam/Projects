@@ -2,9 +2,9 @@
 
 ITSW ALGORITHMS AND DATA STRUCTURES/OPERATING SYSTEM FINAL PROJECT
 
-Rushi Patel	- 100615230
-Yash Patel - 100621177
-Jeet Desai - 100635399
+Rushi Patel	
+Yash Patel 
+Jeet Desai 
 
 */
 
