@@ -13,6 +13,8 @@ This repository includes acedamic projects which are done in grourps from my uni
 
 6. Software-based switch emulator (CLI)
 
+7. Swiss Army Cryptographic Toolset for beginners (CLI)
+
 
  
  
