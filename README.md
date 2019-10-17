@@ -11,10 +11,8 @@ This repository includes acedamic projects which are done in grourps from my uni
 
 5. Hack-something (NTP reflection attack)
 
-6. Web framework to create and manage custom blockchain 
+6. Software-based switch emulator (CLI)
 
-7. Software-based switch emulator (CLI)
 
-8. Web development 
  
  
