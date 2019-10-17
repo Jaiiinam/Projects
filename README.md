@@ -7,7 +7,7 @@ This repository includes acedamic projects which are done in grourps from my uni
 
 3. Troubleshoot case study
 
-4. System administrator (Active Directory)
+4. System administration (Active Directory)
 
 5. Hack-something (NTP reflection attack)
 
