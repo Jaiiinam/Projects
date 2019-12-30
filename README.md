@@ -1,19 +1,17 @@
 # Academic Projects
 This repository includes my acedamic projects. Most of these projects are final projects however, I will be uploading other projects which I have worked on for my personal learning experience. The following projects should be in the repository:
  
-1. Route case study 
+Route case study 
 
-2. Switch case study 
+Switch case study 
 
-3. Troubleshoot case study
+Troubleshoot case study
 
-4. System administration (Active Directory)
+Hack-something (NTP reflection attack)
 
-5. Hack-something (NTP reflection attack)
+Software-based switch emulator (CLI)
 
-6. Software-based switch emulator (CLI)
-
-7. Swiss Army Cryptographic Toolset for beginners (CLI)
+Swiss Army Cryptographic Toolset for beginners (CLI)
 
 
  
