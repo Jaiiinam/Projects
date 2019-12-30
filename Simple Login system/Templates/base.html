@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    </head>
+    {% if title %}
+    <title>{{ title }} - BOP</title>
+    {% else %}
+    <title>Home</title>
+    {% endif %}
+
+    <body>
+        <nav class="navbar navbar-expand-sm bg-white navbar-white border border sticky-top" >
+
+          <div class="heading" id="iconNav" >
+            <a href="{{ url_for('login') }}" style="text-decoration: none;"><h1 style="color:black; font-family: Courier New; text-align: center; font-weight: bold;"><i class="fa fa-bank" style="font-size:48px;color:black"></i> Bank of People</h1><a>
+          </div>
+
+          <!-- Links -->
+          <ul class="navbar-nav justify-content-center">
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}"  style="font-weight: bold;">Home</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item" style="font-weight: bold;">
+              <a class="nav-link" href="{{ url_for('whoAreWe') }}">Who are we?</a>
+            </li>
+
+          </ul>
+          <div class="navbar-nav ml-auto" id="loginRegisterNav">
+
+            {% if current_user.is_authenticated %}
+              <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"  style="font-weight: bold;">{{current_user.username}}</button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="#">Transactions</a>
+                  <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                </div>
+              </div>
+            {% else %}
+              <a href="{{ url_for('login') }}" class="nav-item nav-link"  style="font-weight: bold;">Login</a>
+              <a href="{{ url_for('register') }}" class="nav-item nav-link"  style="font-weight: bold;">Register</a>
+            {% endif %}
+
+            
+          </div>
+
+        </nav>
+
+        <div class="align-middle">{% block content %}{% endblock %}</div>
+
+    </body>
+
+    <footer id="footer" class="fixed-bottom">Bank of People | © All Rights Reserved</footer>
+</html>
