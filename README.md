@@ -1,5 +1,5 @@
 # Academic Projects
-This repository includes acedamic projects which are done in grourps from my university. Most of these projects are final projects but there are some projects which I have worked on for my personal learning experience. 
+This repository includes my acedamic projects. Most of these projects are final projects however, I will be uploading other projects which I have worked on for my personal learning experience. The following projects should be in the repository:
  
 1. Route case study 
 
@@ -12,6 +12,8 @@ This repository includes acedamic projects which are done in grourps from my uni
 5. Hack-something (NTP reflection attack)
 
 6. Software-based switch emulator (CLI)
+
+7. Swiss Army Cryptographic Toolset for beginners (CLI)
 
 
  
