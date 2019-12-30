@@ -126,7 +126,7 @@ def player1Turn(lists,turns,totalScore):
         print("It's a draw")
         printList(lists, turns)
         playAgain(lists, turns,totalScore)
-        sys.exit()
+
         
 
     player2Turn(lists,turns,totalScore)
@@ -165,7 +165,7 @@ def player2Turn(lists,turns,totalScore):
         print("It's a draw")
         printList(lists, turns)
         playAgain(lists, turns,totalScore)
-        sys.exit()
+
         
 
     player1Turn(lists,turns,totalScore)
