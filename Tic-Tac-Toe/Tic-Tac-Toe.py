@@ -115,51 +115,19 @@ def player1Turn(lists,turns,totalScore):
             lists[x] = "X"
         Board(lists)
 
- 
-    if(len(turns) == 9):
-        printList(lists, turns)
-        sys.exit()
-        
-    if((lists[0] == 'X') & (lists[1] == 'X') & (lists[2] == 'X')):
+
+    if isWinner(lists,'X'):
         print("Player 1 won!")
         printList(lists, turns)
         totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
         playAgain(lists,turns,totalScore)   
-    if((lists[3] == 'X') & (lists[4] == 'X') & (lists[5] == 'X')):
-        print("Player 1 won!")
+
+    if(len(turns) == 9):
+        print("It's a draw")
         printList(lists, turns)
-        totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
-        playAgain(lists, turns, totalScore)
-    if((lists[6] == 'X') & (lists[7] == 'X') & (lists[8] == 'X')):
-        print("Player 1 won!")
-        printList(lists, turns)
-        totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
         playAgain(lists, turns,totalScore)
-    if((lists[0] == 'X') & (lists[3] == 'X') & (lists[6] == 'X')):
-        print("Player 1 won!")
-        printList(lists, turns)
-        totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[1] == 'X') & (lists[4] == 'X') & (lists[7] == 'X')):
-        print("Player 1 won!")
-        printList(lists, turns)
-        totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[2] == 'X') & (lists[5] == 'X') & (lists[8] == 'X')):
-        print("Player 1 won!")
-        printList(lists, turns)
-        totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[0] == 'X') & (lists[4] == 'X') & (lists[8] == 'X')):
-        print("Player 1 won!")
-        printList(lists, turns)
-        totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[2] == 'X') & (lists[4] == 'X') & (lists[6] == 'X')):
-        print("Player 1 won!")
-        printList(lists, turns)
-        totalScore['Player1']['Score'] = totalScore['Player1']['Score'] + 1
-        playAgain(lists, turns,totalScore)
+        sys.exit()
+        
 
     player2Turn(lists,turns,totalScore)
     
@@ -185,55 +153,35 @@ def player2Turn(lists,turns,totalScore):
         if((o > -1)&(o < 9)):
             lists[o] = "O"
         Board(lists)
-  
-    if(len(turns) == 9):
+
+
+    if isWinner(lists, 'O'):
+        print("Player 2 won!")
         printList(lists, turns)
+        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
+        playAgain(lists, turns,totalScore)
+        
+    if(len(turns) == 9):
+        print("It's a draw")
+        printList(lists, turns)
+        playAgain(lists, turns,totalScore)
         sys.exit()
         
-    if((lists[0] == 'O') & (lists[1] == 'O') & (lists[2] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[3] == 'O') & (lists[4] == 'O') & (lists[5] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[6] == 'O') & (lists[7] == 'O') & (lists[8] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[0] == 'O') & (lists[3] == 'O') & (lists[6] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[1] == 'O') & (lists[4] == 'O') & (lists[7] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[2] == 'O') & (lists[5] == 'O') & (lists[8] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[0] == 'O') & (lists[4] == 'O') & (lists[8] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
-    if((lists[2] == 'O') & (lists[4] == 'O') & (lists[6] == 'O')):
-        print("Player 2 won!")
-        printList(lists, turns)
-        totalScore['Player2']['Score'] = totalScore['Player2']['Score'] + 1
-        playAgain(lists, turns,totalScore)
 
     player1Turn(lists,turns,totalScore)
 
 
+
+def isWinner(lists, xO):
+    return(((lists[0] == xO) & (lists[1] == xO) & (lists[2] == xO))or
+    ((lists[3] == xO) & (lists[4] == xO) & (lists[5] == xO)) or
+    ((lists[6] == xO) & (lists[7] == xO) & (lists[8] == xO))or 
+    ((lists[0] == xO) & (lists[3] == xO) & (lists[6] == xO))or
+    ((lists[1] == xO) & (lists[4] == xO) & (lists[7] == xO))or
+    ((lists[2] == xO) & (lists[5] == xO) & (lists[8] == xO))or
+    ((lists[0] == xO) & (lists[4] == xO) & (lists[8] == xO))or
+    ((lists[2] == xO) & (lists[4] == xO) & (lists[6] == xO)))
+    
 
 def playAgain(lists, turns,totalScore):
     
@@ -261,8 +209,7 @@ def playAgain(lists, turns,totalScore):
         sys.exit()
 
         
-
-        
+   
 def printList(lists, turns):
     print(lists)
     print(turns)
@@ -270,12 +217,18 @@ def printList(lists, turns):
 
 
 
-print("")    
-lists = ['0','1','2','3','4','5','6','7','8']
-turns = []
-totalScore = {'Player1' : {'Score' : 0}, 'Player2' : {'Score' : 0}}
-instructions(lists, turns, totalScore)
-print("")
+
+def main():
+    print("")    
+    lists = ['0','1','2','3','4','5','6','7','8']
+    turns = []
+    totalScore = {'Player1' : {'Score' : 0}, 'Player2' : {'Score' : 0}}
+    instructions(lists, turns, totalScore)
+    print("")
+
+
+
+main()
 
 
 
