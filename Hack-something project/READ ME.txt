@@ -1,0 +1,1 @@
+This project is just for educational purposes. Please do not try this sort of attacks towards actual NTP servers, it is illegal and you could get prosecuted. You will be responsible for your own actions.  
