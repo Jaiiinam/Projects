@@ -1,4 +1,4 @@
-Note: This web application is built on Flask framewrok 
+Note: This web application is built on Flask framework 
 
 Before you run this code make sure you have following things installed:
 
