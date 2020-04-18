@@ -1,4 +1,4 @@
-Note: This code is a JSON powered project. Hence, use a postman type application or a browser (FireFox provides cleaner output) is needed
+Note: This code is a JSON powered project. Hence, use a postman type application or a browser (FireFox provides cleaner output). 
 
 Run the given code and then do as following:
 
