@@ -14,4 +14,4 @@ pip3 install -r requirements.txt
 
 ```bash
 - main.py 
-- Visit: [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
+- Once application is up and running please visit: http://127.0.0.1:8080/
