@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <br><br><br>
+
+    <div class="line">
+      <div class="container">
+
+      
+        <div class="row" style=" align-self: center;">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <h1>Blocks</h1><br>
+            
+            <div>
+              
+              {% for value in response %}
+                
+
+                {% for x in value %}
+                    <h3 style="font-weight: bold;">{{ x }}</h3>
+                    {% if x =="header" %}
+                        {% for y in value["header"] %}
+                        <p style="font-weight: bold;">{{y}}</p> 
+                        <p>{{value[x][y]}}</p>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if x =="transactions" %}
+                        {% for y in value["transactions"] %}
+                        <p style="font-weight: bold;">{{y}}</p>
+                        <p>{{value[x][y]}}</p>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if x=="hash" %}
+                        <p>{{value["hash"]}}</p>
+                    {% endif %}
+                {% endfor %}
+              
+                <p>-----------------------------------------------------------------------------------</p>
+                
+              {% endfor %}
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+{% endblock %}

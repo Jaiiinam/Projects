@@ -8,15 +8,20 @@ import binascii
 import copy
 import random
 from random import randrange
-from flask import Flask, jsonify, request, json, Response
+from flask import Flask, jsonify, request, json, Response, render_template, flash
+import forms
 
-app = Flask(__name__)
 
 
+app = Flask(__name__, template_folder='Templates')
+app.config['SECRET_KEY'] = 'you-will-never-guess'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///credentials.db'
 # ---------------------------------------- BLOCKCHAIN CLASS ---------------------------------------- #
 
 
 class Blockchain:
+
 
 
     def __init__(self):
@@ -323,16 +328,21 @@ def create_transactions():
 
 # ---------------------------------------- New FLASK ROUTES ------------------------------------ #
 
-
-@app.route('/create_wallet', methods = ['GET'])
+@app.route('/create_wallet', methods = ['GET', 'POST'])
 def create_wallet():
 
-    response = Response(
-        response = json.dumps(blockchain.create_wallet()),
-        status = 200,
-        mimetype = 'application/json'
-    )
-    return response
+    form = forms.create_wallets()
+
+    if request.method == 'POST':
+
+        if form.validate_on_submit(): 
+
+            response = blockchain.create_wallet()
+            return render_template('create_wallets.html', title='Wallets', form=form, response=response)
+    else:
+        response = {"Create a wallet by clicking on create wallet button (make sure to save the information)"}
+        return render_template('create_wallets.html', title='Wallets', form=form, response=response)
+
 
 
 @app.route('/show_balances', methods = ['GET'])
@@ -345,138 +355,153 @@ def show_balances():
     for id, info in total_wallets.items():
         del info['private_key']
 
-    response = Response(
-        response = json.dumps(total_wallets),
-        status = 200,
-        mimetype = 'application/json'
-    )
-    return response
+    response = total_wallets
+    return render_template('show_balances.html', title='Balance', response=response)
 
 
 @app.route('/show_mempool', methods = ['GET'])
 def show_mempool():
 
-    response = Response(
-        response = json.dumps(blockchain.mempool),
-        status = 200,
-        mimetype = 'application/json'
-    )
-    return response
+    response = blockchain.mempool
+    return render_template('show_mempool.html', title='Mempool', response=response)
 
 
-@app.route('/create_transaction', methods = ['GET'])
+@app.route('/create_transaction', methods = ['GET', 'POST'])
 def create_transaction():
+    form = forms.create_transactions()
+    if request.method == 'POST':
+        try:
 
-    try:
-
-        transaction = {
-            'time': int(time.time()),
-            'from': request.args.get('from', type=str),
-            'to': request.args.get('to', type=str),
-            'amount': request.args.get('amount', type=float)
-        }
+            transaction = {
+                'time': int(time.time()),
+                'from': str(form.From.data),
+                'to': str(form.to.data),
+                'amount': int(form.amount.data)
+            }
 
 
-        private_key = request.args.get('private_key', type=str)
-        assert private_key == blockchain.wallets[transaction['from']]['private_key']
+            private_key = str(form.private_key.data)
+            assert private_key == blockchain.wallets[transaction['from']]['private_key']
 
-        if(transaction['amount'] > blockchain.wallets[transaction['from']]['balance']):
+            if(transaction['amount'] > blockchain.wallets[transaction['from']]['balance']):
 
-            response = Response(
-                response = json.dumps({'Error': 'Invalid transaction'}),
-                status = 400,
-                mimetype = 'application/json'
-            )
-            return response
+                response = {'Error': 'Invalid transaction. Please double the entered information.'}
+                form.From.data = ""
+                form.to.data = ""
+                form.amount.data = None
+                form.private_key.data = ""
+                return render_template('create_transactions.html', title='Transaction', form=form, response=response)
 
-    except:
+        except:
+            form.From.data = ""
+            form.to.data = ""
+            form.amount.data = None
+            form.private_key.data = ""
+            response = {'Error': 'Invalid transaction. Please double the entered information.'}
+            return render_template('create_transactions.html', title='Transaction', form=form, response=response)
 
-        response = Response(
-            response = json.dumps({'Error': 'Invalid transaction'}),
-            status = 400,
-            mimetype = 'application/json'
-        )
-        return response
 
-    transaction_id = blockchain.hash_transaction(transaction)
+        transaction_id = blockchain.hash_transaction(transaction)
 
-    if blockchain.add_transaction_to_mempool(transaction_id, transaction):
-        response = Response(
-            response = json.dumps({'result': transaction_id}),
-            status = 200,
-            mimetype = 'application/json'
-        )
+        if blockchain.add_transaction_to_mempool(transaction_id, transaction):
+            response = {'Transaction ID': transaction_id}
+        else:
+            
+            response = {'error': 'invalid transaction. Please double the entered information.'}
+
+        form.From.data = ""
+        form.to.data = ""
+        form.amount.data = None
+        form.private_key.data = ""
+        return render_template('create_transactions.html', title='Transaction', form=form, response=response)
+
     else:
-        response = Response(
-            response = json.dumps({'error': 'invalid transaction'}),
-            status = 400,
-            mimetype = 'application/json'
-        )
+        response = {"Use your public key as the From address. Use receiver's public key as the To address. Use your Private Key to verify your wallet."}
+        form.From.data = ""
+        form.to.data = ""
+        form.amount.data = None
+        form.private_key.data = ""
+        return render_template('create_transactions.html', title='Wallets', form=form, response=response)
 
-    return response
 
 
 # ---------------------------------------- FLASK ROUTES ---------------------------------------- #
 # No need to modify anything below!
 
 
-@app.route('/mine_block', methods = ['GET'])
+@app.route('/mine_block', methods = ['GET', 'POST'])
 def mine_block():
 
-    block_data = request.args.get('data', default='', type=str)
+    form = forms.mine_block()
 
-    response = Response(
-        response = json.dumps(blockchain.mine_block(block_data)),
-        status = 200,
-        mimetype = 'application/json'
-    )
-    return response
+    if request.method == 'POST':
+
+        if form.validate_on_submit():
+
+            block_data = ' '
+            response = blockchain.mine_block(block_data)
+            return render_template('mine_block.html', title='Mine Block', form=form, response=response)
+    else:
+        response = {"Please click the Mine block button to mine a new block."}
+        return render_template('mine_block.html', title='Mine Block', form=form, response=response)
 
 
-@app.route('/check_blockchain', methods = ['GET'])
+
+@app.route('/check_blockchain', methods = ['GET', 'POST'])
 def check_blockchain():
 
-    response = Response(
-        response = json.dumps({'result': blockchain.check()}),
-        status = 200,
-        mimetype = 'application/json'
-    )
-    return response
+    form = forms.check_blockchain()
+
+    if request.method == 'POST':
+
+        if form.validate_on_submit():
+            response = {'result': blockchain.check()}
+            return render_template('check_blockchain.html', title='Check blockchain', form=form, response=response)
+    else:
+        response = {"Please click the Check blockchain button to verify the whole blockchain."}
+        return render_template('check_blockchain.html', title='Check blockchain', form=form, response=response)
+
 
 
 @app.route('/get_blocks', methods = ['GET'])
 def get_blocks():
 
-    response = Response(
-        response = json.dumps(blockchain.chain),
-        status = 200,
-        mimetype = 'application/json'
-    )
-    return response
+    response = blockchain.chain
+    return render_template('get_blocks.html', title='Blocks', response=response)
 
 
-@app.route('/get_block', methods = ['GET'])
+
+@app.route('/get_block', methods = ['GET', 'POST'])
 def get_block():
+    
+    form = forms.get_block()
 
     try:
+        if request.method == 'POST':
 
-        block_number = request.args.get('number', default=0, type=int)
-        response = Response(
-            response = json.dumps(blockchain.chain[block_number]),
-            status = 200,
-            mimetype = 'application/json'
-        )
+            if form.validate_on_submit(): 
+        
+                    block_number = int(form.block_number.data)
+                    response =  blockchain.chain[block_number]
+                    return render_template('get_block.html', title='Block', form=form, response=response)
+                
+            else:
+                response = {"Sorry this block does not exist yet"}
+                return render_template('get_block.html', title='Block', form=form, response=response)
+        else:
+            response = {"No block is selected yet"}
+            return render_template('get_block.html', title='Block', form=form, response=response)
+    except (IndexError, ValueError) as e:
+        response = {"Sorry this block does not exist yet"}
+        return render_template('get_block.html', title='Block', form=form, response=response)
 
-    except IndexError:
 
-        response = Response(
-            response = json.dumps({'error': 'invald block number'}),
-            status = 400,
-            mimetype = 'application/json'
-        )
-
-    return response
+@app.route('/')
+@app.route('/tutorial', methods = ['GET'])
+def tutorial():
+    return render_template('tutorial.html', title='Tutorial')
 
 
-blockchain = Blockchain()
-app.run(host = '0.0.0.0', port = 8080, debug=1)
+if __name__ == '__main__':
+    blockchain = Blockchain()
+    app.run(host = '127.0.0.1', port = 8080, debug=1)

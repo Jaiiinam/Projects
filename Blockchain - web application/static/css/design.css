@@ -1,0 +1,30 @@
+.heading{
+
+    color: black;
+    padding: 30px;
+}
+
+
+
+#iconNav{
+	margin: 0 0 0 500px;
+
+}
+
+
+#loginRegisterNav{
+	margin: 0 600px 0 0;
+
+}
+
+
+#footer {
+	margin: 50px 0 30px 0;
+	text-align: center;
+	color: rgb(102, 120, 148);
+	text-shadow: 0 1px 0 #FFFFFF;
+	font-weight: bold;
+	
+
+}
+

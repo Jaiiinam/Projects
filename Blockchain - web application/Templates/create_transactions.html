@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <br><br><br>
+
+    <div class="line">
+      <div class="container">
+
+      
+        <div class="row" style=" align-self: center;">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <h1>Transfer Funds</h1><br>
+            
+            <form method="POST">
+              {{ form.hidden_tag() }}
+
+              <div class="form-group">
+                {{ form.to.label(class="form-control-label")}}
+
+                {% if form.to.errors %}
+                  {{ form.to(class="form-control form-control-lg is-invalid")}}
+                  <div class="invalid -feedback">
+                    {% for error in form.to.errors %}
+                      <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.to(class="form-control form-control-lg")}}
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                {{ form.From.label(class="form-control-label")}}
+
+                {% if form.From.errors %}
+                  {{ form.From(class="form-control form-control-lg is-invalid")}}
+                  <div class="invalid -feedback">
+                    {% for error in form.From.errors %}
+                      <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.From(class="form-control form-control-lg")}}
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                {{ form.private_key.label(class="form-control-label")}}
+
+                {% if form.private_key.errors %}
+                  {{ form.private_key(class="form-control form-control-lg is-invalid")}}
+                  <div class="invalid -feedback">
+                    {% for error in form.private_key.errors %}
+                      <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.private_key(class="form-control form-control-lg")}}
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                {{ form.amount.label(class="form-control-label")}}
+
+                {% if form.amount.errors %}
+                  {{ form.amount(class="form-control form-control-lg is-invalid")}}
+                  <div class="invalid -feedback">
+                    {% for error in form.amount.errors %}
+                      <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.amount(class="form-control form-control-lg")}}
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                {{ form.submit(class="btn btn-primary")}}
+              </div>
+
+            </form>
+            <div>
+              
+              {% for value in response %}
+                <h3 style="font-weight: bold;">{{ value }}</h3>
+                <h3 style="font-weight: bold;">{{response[value]}}</h3>
+                
+              {% endfor %}
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+{% endblock %}

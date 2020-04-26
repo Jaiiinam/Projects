@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <br><br><br>
+
+    <div class="line">
+      <div class="container">
+
+      
+        <div class="row" style=" align-self: center;">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <h1>Wallet & Balance</h1><br>
+            
+            <div>
+              
+                {% for value in response %}
+                  <h3 style="font-weight: bold;">{{ value }}</h3>
+                
+                  {% for x in response[value] %}
+                      <p style="font-weight: bold;">{{x}}</p>
+                      <p>{{response[value][x]}}</p>
+                  {% endfor %}
+              
+                {% endfor %}
+                
+              </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+{% endblock %}

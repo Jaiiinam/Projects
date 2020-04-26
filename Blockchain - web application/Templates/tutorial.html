@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <br><br><br>
+
+    <div class="line">
+      <div class="container">
+
+      
+        <div class="row" >
+         
+
+          <div>
+            <h1 style=" text-align: center;">Tutorial</h1><br><br>
+            <div>
+                <h3 style="font-weight: bold;">Step 1: Create wallets</h3><br>
+                <p>In this step we look at how to create wallets.</p>
+                <p>Go to the  <a href="{{ url_for('create_wallet') }}">Create wallet</a> page and create a wallet. Make sure to store the wallet information.</p>
+                <p>Each wallet will contain information such as an Account address (public key), a Key to the account (private key - must be kept secret, will be used to transfer funds), and a balance of 10 coins (default).</p>
+                <p>Go to the <a href="{{ url_for('show_balances') }}">Balances</a> page, you will see all wallets and their balances.</p>
+            </div>
+
+            <br>
+
+            <div>
+                <h3 style="font-weight: bold;">Step 2: Create Transactions</h3><br>
+                <p>In this step we look at how to transfer funds between wallets.</p>
+                <p>Go to the <a href="{{ url_for('show_balances') }}">Transactions</a> page and transfer funds between wallets. Make sure to create more than 10 transactions.</p>
+                <p>Once you have create 10 transactions please visit <a href="{{ url_for('show_mempool') }}">Mempool</a> page this will show you all transactions.</p>
+                <p>Every time you mine a block those 10 transactions will be selected to create a merkle root.</p>
+            </div>
+
+            <br>
+            
+            <div>
+                <h3 style="font-weight: bold;">Step 3: Mine Block</h3><br>
+                <p>Go to <a href="{{ url_for('mine_block') }}">Mine Block</a> and click on the mine block.</a>page</p>
+                <p>You will receive recently mined block with header, transactions, and a block hash.</p>
+                <p>Normally to mine a block you will be asked to submit a solution to a puzzle. However for simplicity sake we are just allowing you to mine blocks without any kind of data.</p>
+            </div>
+
+            <br>
+
+            <div>
+                <h3 style="font-weight: bold;">Step 4: Check Blockchain</h3><br>
+                <p>In this step we will verify the blockchain. Please visit <a href="{{ url_for('check_blockchain') }}">Check Blockchain</a> page.</p>
+                <p>In this verification we are checking each block and block's hash, it's previous hash, and it's merkle root.</p>
+                <p>If result is not "ok" then blockchain was tempered or hacked.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+{% endblock %}

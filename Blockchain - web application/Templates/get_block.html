@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <br><br><br>
+
+    <div class="line">
+      <div class="container">
+
+      
+        <div class="row" style=" align-self: center;">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <h1>Get Block</h1><br>
+            
+            <form method="POST">
+              {{ form.hidden_tag() }}
+
+              <div class="form-group">
+                {{ form.block_number.label(class="form-control-label")}}
+
+                {% if form.block_number.errors %}
+                  {{ form.block_number(class="form-control form-control-lg is-invalid")}}
+                  <div class="invalid -feedback">
+                    {% for error in form.block_number.errors %}
+                      <span>{{error}}</span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ form.block_number(class="form-control form-control-lg")}}
+                {% endif %}
+              </div>
+
+              <div class="form-group">
+                {{ form.submit(class="btn btn-primary")}}
+              </div>
+
+            </form>
+            <div>
+              
+              {% for value in response %}
+                <h3 style="font-weight: bold;">{{ value }}</h3>
+              
+                {% if value=="header" %}
+                  {% for x in response["header"] %}
+                    <p style="font-weight: bold;">{{x}}</p>
+                    <p>{{response[value][x]}}</p>
+                  {% endfor %}
+                {% endif %}
+
+                {% if value=="transactions" %}
+                  {% for x in response["transactions"] %}
+                    <p style="font-weight: bold;">{{x}}</p>
+                    <p>{{response[value][x]}}</p>
+                  {% endfor %}
+                {% endif %}
+
+                {% if value=="hash" %}
+                    <p>{{response[value]}}</p>
+                {% endif %}
+                
+              {% endfor %}
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+{% endblock %}

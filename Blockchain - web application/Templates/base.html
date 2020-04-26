@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/design.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    </head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Bitcoin</title>
+    {% endif %}
+
+    <body>
+        <nav class="navbar navbar-expand-sm bg-white navbar-white border border sticky-top justify-content-center" >
+        
+          <li class="nav-item">
+            <a class="nav-link"  href="{{ url_for('tutorial') }}" style="text-decoration: none;"><h1 style="color:black; font-family: Courier New;"><i class="fa fa-cubes" style="font-size:58px;color:black"></i> Blockchain</h1><a>
+          </li> 
+
+          <!-- Links -->
+          <ul class="navbar-nav navbar-default active">
+      
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('get_block') }}"  style="font-weight: bold;">Get Block</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('get_blocks') }}"  style="font-weight: bold;">All Blocks</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('create_wallet') }}"  style="font-weight: bold;">Create wallet</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('create_transaction') }}"  style="font-weight: bold;">Transactions</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('show_balances') }}"  style="font-weight: bold;">Balances</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('show_mempool') }}"  style="font-weight: bold;">Mempool</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('mine_block') }}"  style="font-weight: bold;">Mine Block</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('check_blockchain') }}"  style="font-weight: bold;">Check Blockchain</a>
+            </li>
+
+          </ul>
+          
+        </nav>
+
+
+        <div class="align-middle" style="margin-bottom: 100px; align-items: center;">{% block content %}{% endblock %}</div>
+
+    </body>
+
+    <footer id="footer">Blockchain | © All Rights Reserved</footer>
+</html>
