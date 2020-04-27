@@ -20,4 +20,5 @@ SQLAlchemy
 Run this command in your terminal or cmd (make sure you are in the correct directory): 
 pip3 install -r requirements.txt (This will install all necessary packages to run this application)
 
-## Also install SQLite3
+Also install SQLite3
+```
